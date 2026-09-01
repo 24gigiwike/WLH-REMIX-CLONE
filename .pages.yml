@@ -1,0 +1,34 @@
+media:
+  input: public/images
+  output: /images
+
+content:
+  - name: audit_homes
+    label: Audit Registry
+    type: collection
+    path: src/data/audit_homes
+    format: json
+    filename: "{id}.json"
+    fields:
+      - name: id
+        label: Internal ID
+        type: string
+      - name: isVideo
+        label: "Is Video? (Checked: Video, Unchecked: Photo)"
+        type: boolean
+        default: false
+      - name: videoUrl
+        label: "Upload Video File (MP4)"
+        type: file
+      - name: image
+        label: "Upload Photo Image"
+        type: image
+      - name: title
+        label: Title
+        type: string
+      - name: loc
+        label: Location
+        type: string
+      - name: desc
+        label: Description
+        type: text

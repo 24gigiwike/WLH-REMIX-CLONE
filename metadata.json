@@ -1,0 +1,8 @@
+{
+  "name": "Remix WLH",
+  "description": "Secure property investment for Nigerians abroad. We sell certainty and handle the uncertainty of investing back home.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

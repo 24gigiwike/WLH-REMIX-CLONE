@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400;1,700&family=Montserrat:wght@700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-montserrat: "Montserrat", sans-serif;
+  
+  --color-navy-regal: #0F172A;
+  --color-emerald-regal: #1f8266;
+  --color-orange-regal: #cfc070;
+  --color-art-gray: #E2E8F0;
+  --color-off-white: #F8FAFC;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-white text-navy-regal selection:bg-orange-regal selection:text-navy-regal;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
