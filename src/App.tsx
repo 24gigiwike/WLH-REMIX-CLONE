@@ -24,11 +24,26 @@ import {
   Briefcase,
   Users,
   TrendingUp,
-  HardHat
+  HardHat,
+  BookOpen
 } from "lucide-react";
 import { useState, FormEvent } from "react";
 import PremiumPropertyCarousel from "./components/PremiumPropertyCarousel";
 import BuildingConstructionSection from "./components/BuildingConstructionSection";
+import BlogSection from "./components/BlogSection";
+
+// Navigation menu anchors for seamless site exploration
+const NAV_ITEMS = [
+  { label: "Featured", href: "#featured-properties", icon: Home },
+  { label: "About", href: "#about", icon: Users },
+  { label: "Verification", href: "#verification", icon: ShieldCheck },
+  { label: "Profile", href: "#profile", icon: Target },
+  { label: "Construction", href: "#building-construction", icon: HardHat },
+  { label: "Leadership", href: "#leadership", icon: Briefcase },
+  { label: "Audit Registry", href: "#audit-registry", icon: FileCheck },
+  { label: "Blog & Advisory", href: "#blog", icon: BookOpen },
+  { label: "Contact", href: "#contact", icon: Phone },
+];
 
 // ==========================================
 // AUDIT REGISTRY HARDWARE CONFIGURATION
@@ -52,6 +67,7 @@ const fadeIn = {
 
 export default function App() {
   const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -70,91 +86,172 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-navy-regal flex flex-col selection:bg-orange-regal selection:text-navy-regal">
-      {/* HEADER */}
-      <header className="w-full bg-[#1f8266] shrink-0 border-b border-[#cfc070]/15 shadow-lg py-3 md:py-4.5">
-        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-12 flex flex-col gap-3">
+      {/* STICKY HEADER WITH GLOBAL NAVIGATION */}
+      <header className="sticky top-0 z-50 w-full bg-[#1f8266] border-b border-[#cfc070]/25 shadow-md">
+        <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 flex flex-col gap-2">
           
-          {/* Top Section */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3.5 sm:gap-5 md:gap-6">
-              {/* Logo Container with white background for maximum visibility */}
-              <div className="flex items-center shrink-0 bg-white p-1.5 sm:p-2 rounded-xl shadow-md border border-white/15">
+          {/* Main Top Bar */}
+          <div className="flex items-center justify-between gap-4">
+            
+            {/* Logo and Brand */}
+            <a href="#hero" className="flex items-center gap-2.5 sm:gap-3.5 md:gap-4 shrink-0 group">
+              <div className="flex items-center shrink-0 bg-white p-1 sm:p-1.5 rounded-lg shadow-sm border border-white/20">
                 <img 
                   src="https://res.cloudinary.com/dtkluxukm/image/upload/v1788147995/wlh-logo_orubpv.jpg" 
                   alt="WiseLiving Homes and Property LTD. Logo"
-                  className="h-9 xs:h-11 sm:h-12 md:h-15 w-auto object-contain rounded-lg"
+                  className="h-8 xs:h-9 sm:h-11 md:h-12 w-auto object-contain rounded"
                   referrerPolicy="no-referrer"
                 />
               </div>
 
-              {/* Thin Vertical Gold Divider */}
-              <div className="h-9 xs:h-11 sm:h-12 md:h-15 w-[1.5px] bg-[#cfc070]/40 shrink-0 self-center" />
+              <div className="h-8 xs:h-9 sm:h-11 md:h-12 w-[1.5px] bg-[#cfc070]/40 shrink-0 self-center" />
 
-              {/* Brand Typography Block */}
               <div className="flex flex-col justify-center select-none leading-none">
-                <span className="font-playfair font-extrabold text-white text-[32px] xs:text-[36px] sm:text-4xl md:text-5xl lg:text-[52px] tracking-tight leading-[1.05] drop-shadow-sm">
+                <span className="font-playfair font-extrabold text-white text-2xl xs:text-2xl sm:text-3xl md:text-3xl lg:text-4xl tracking-tight leading-[1.05] drop-shadow-sm group-hover:text-[#cfc070] transition-colors">
                   WiseLiving
                 </span>
-                <span className="font-montserrat font-bold text-[#cfc070] text-[9px] xs:text-[10px] sm:text-[11.5px] md:text-sm tracking-[0.15em] sm:tracking-[0.2em] uppercase leading-none mt-1 sm:mt-1.5">
+                <span className="font-montserrat font-bold text-[#cfc070] text-[8px] xs:text-[8.5px] sm:text-[9.5px] md:text-[11px] tracking-[0.14em] sm:tracking-[0.18em] uppercase leading-none mt-0.5 sm:mt-1">
                   HOMES AND PROPERTY LTD.
                 </span>
               </div>
+            </a>
+
+            {/* Desktop Navigation Menu (for lg+ screens) */}
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5" aria-label="Main Navigation">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className={`px-2 xl:px-2.5 py-1.5 rounded-md text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                    item.href === "#contact"
+                      ? "bg-[#cfc070] text-[#0F172A] hover:bg-white shadow-sm ml-1"
+                      : "text-white/90 hover:text-[#cfc070] hover:bg-white/10"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            {/* Right side Mobile/Tablet buttons */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <a
+                href="#contact"
+                className="hidden sm:inline-flex lg:hidden items-center gap-1.5 bg-[#cfc070] text-[#0F172A] hover:bg-white px-3 py-1.5 rounded-md font-bold text-[11px] uppercase tracking-wider transition-colors shadow-sm"
+              >
+                <Phone className="w-3 h-3" />
+                <span>Contact</span>
+              </a>
+
+              {/* Mobile Hamburger Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white focus:outline-none transition-colors cursor-pointer"
+                aria-label={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-5 h-5 text-[#cfc070]" />
+                ) : (
+                  <Menu className="w-5 h-5 text-white" />
+                )}
+              </button>
             </div>
 
-            {/* Desktop Bureau Stamp */}
-            <div className="hidden lg:block text-right select-none pl-4">
-              <span className="text-[9px] text-[#cfc070]/75 uppercase tracking-[0.2em] block leading-none mb-1">
-                SECURE PROPERTY SOLUTIONS
-              </span>
-              <span className="text-xs font-semibold text-white tracking-widest uppercase">
-                Investment Certainty Bureau
-              </span>
-            </div>
           </div>
 
-          {/* Thin Horizontal Divider */}
-          <hr className="border-t border-[#cfc070]/20 w-full" />
-
-          {/* Bottom Section - Premium Trust and Value Strip */}
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 sm:gap-x-6 gap-y-1.5 text-[10.5px] sm:text-xs md:text-sm font-semibold select-none leading-none py-0.5">
-            <div className="flex items-center gap-1.5 sm:gap-2 text-white hover:text-[#cfc070] transition-colors duration-200">
-              <Home className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#cfc070] shrink-0" />
-              <span className="font-montserrat tracking-wide">Quality Homes</span>
+          {/* Sub Bar: Trust and Value Badges (Desktop & Tablet) */}
+          <div className="hidden md:flex items-center justify-between border-t border-[#cfc070]/20 pt-2 text-[11px] text-white/90">
+            <div className="flex items-center gap-4 lg:gap-6 font-medium">
+              <div className="flex items-center gap-1.5 text-white">
+                <Home className="h-3.5 w-3.5 text-[#cfc070]" />
+                <span className="font-montserrat">Quality Homes</span>
+              </div>
+              <div className="h-3 w-[1px] bg-[#cfc070]/30" />
+              <div className="flex items-center gap-1.5 text-white">
+                <MapPin className="h-3.5 w-3.5 text-[#cfc070]" />
+                <span className="font-montserrat">Prime Locations</span>
+              </div>
+              <div className="h-3 w-[1px] bg-[#cfc070]/30" />
+              <div className="flex items-center gap-1.5 text-white">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#cfc070]" />
+                <span className="font-montserrat">Trusted Service</span>
+              </div>
+              <div className="h-3 w-[1px] bg-[#cfc070]/30" />
+              <a href="#building-construction" className="flex items-center gap-1.5 text-[#cfc070] hover:text-white transition-colors">
+                <HardHat className="h-3.5 w-3.5 text-[#cfc070]" />
+                <span className="font-montserrat">Building & Construction</span>
+              </a>
+              <div className="h-3 w-[1px] bg-[#cfc070]/30" />
+              <a href="#blog" className="flex items-center gap-1.5 text-[#cfc070] hover:text-white transition-colors">
+                <BookOpen className="h-3.5 w-3.5 text-[#cfc070]" />
+                <span className="font-montserrat">Landlord Advisory & Blog</span>
+                <span className="bg-[#cfc070] text-[#0F172A] font-extrabold text-[9px] px-1.5 py-0.2 rounded-full uppercase leading-none">New</span>
+              </a>
             </div>
-            
-            <div className="h-3 w-[1px] bg-[#cfc070]/30 hidden xs:block" />
-            
-            <div className="flex items-center gap-1.5 sm:gap-2 text-white hover:text-[#cfc070] transition-colors duration-200">
-              <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#cfc070] shrink-0" />
-              <span className="font-montserrat tracking-wide">Prime Locations</span>
-            </div>
-            
-            <div className="h-3 w-[1px] bg-[#cfc070]/30 hidden xs:block" />
-            
-            <div className="flex items-center gap-1.5 sm:gap-2 text-white hover:text-[#cfc070] transition-colors duration-200">
-              <ShieldCheck className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#cfc070] shrink-0" />
-              <span className="font-montserrat tracking-wide">Trusted Service</span>
-            </div>
 
-            <div className="h-3 w-[1px] bg-[#cfc070]/30 hidden xs:block" />
-
-            <a href="#building-construction" className="flex items-center gap-1.5 sm:gap-2 text-[#cfc070] hover:text-white transition-colors duration-200 cursor-pointer">
-              <HardHat className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#cfc070] shrink-0" />
-              <span className="font-montserrat tracking-wide">Building & Construction</span>
-            </a>
+            <div className="text-[10px] text-[#cfc070]/80 uppercase tracking-widest font-semibold hidden xl:block">
+              Investment Certainty Bureau • Lagos, Nigeria
+            </div>
           </div>
 
         </div>
+
+        {/* Mobile Navigation Dropdown Drawer */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-[#186a53] border-t border-[#cfc070]/30 px-4 py-4 shadow-2xl animate-in slide-in-from-top-2 duration-200">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mb-4">
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors ${
+                    item.href === "#contact"
+                      ? "bg-[#cfc070] text-[#0F172A]"
+                      : "text-white hover:bg-white/10 hover:text-[#cfc070]"
+                  }`}
+                >
+                  <item.icon className="w-4 h-4 text-[#cfc070]" />
+                  <span>{item.label}</span>
+                </a>
+              ))}
+            </div>
+
+            {/* Quick Contact Actions inside mobile menu */}
+            <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row gap-2">
+              <a
+                href="tel:09064468706"
+                className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white text-xs font-semibold py-2.5 px-3 rounded-lg transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5 text-[#cfc070]" />
+                <span>Call 09064468706</span>
+              </a>
+              <a
+                href="https://wa.me/2349064468706"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1fb855] text-white text-xs font-bold py-2.5 px-3 rounded-lg transition-colors"
+              >
+                <MessageCircle className="w-3.5 h-3.5 fill-white" />
+                <span>WhatsApp Advisory</span>
+              </a>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* MAIN CONTAINER */}
       <main className="w-full">
         
         {/* PREMIUM PROPERTY SHOWCASE CAROUSEL */}
-        <PremiumPropertyCarousel />
+        <div id="featured-properties" className="scroll-mt-24">
+          <PremiumPropertyCarousel />
+        </div>
         
         {/* SECTION 1: HERO (100% width block) */}
-        <section className="relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col justify-center border-b border-art-gray py-24 px-6 md:px-12 overflow-hidden bg-slate-50">
+        <section id="hero" className="scroll-mt-24 relative w-full min-h-[70vh] md:min-h-[80vh] flex flex-col justify-center border-b border-art-gray py-24 px-6 md:px-12 overflow-hidden bg-slate-50">
           {/* Background Cover Image with high resolution luxury home placeholder */}
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 hover:scale-105"
@@ -192,7 +289,7 @@ export default function App() {
         </section>
 
         {/* SECTION 2: FOUNDER & ABOUT US (100% width block) */}
-        <section className="w-full py-20 md:py-28 px-6 md:px-12 border-b border-white/10 bg-navy-regal text-white">
+        <section id="about" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 border-b border-white/10 bg-navy-regal text-white">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-12 lg:gap-20 items-start">
             
             {/* Founder column */}
@@ -263,7 +360,7 @@ export default function App() {
         </section>
 
         {/* SECTION 3: THE PROBLEM & THE SOLUTION (100% width block) */}
-        <section className="w-full py-20 md:py-28 px-6 md:px-12 border-b border-white/10 bg-navy-regal text-white">
+        <section id="verification" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 border-b border-white/10 bg-navy-regal text-white">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[0.90fr_1.1fr] gap-12 lg:gap-20 items-center">
             
             {/* Left side problem description */}
@@ -302,7 +399,7 @@ export default function App() {
         </section>
 
         {/* SECTION 3.2: COMPANY PROFILE (100% width block) */}
-        <section className="w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-[#F8FAFC]">
+        <section id="profile" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-[#F8FAFC]">
           <div className="max-w-7xl mx-auto">
             
             {/* Header */}
@@ -421,7 +518,7 @@ export default function App() {
         <BuildingConstructionSection />
 
         {/* SECTION 3.5: BOARD OF DIRECTORS (100% width block) */}
-        <section className="w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-white">
+        <section id="leadership" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-white">
           <div className="max-w-7xl mx-auto">
             <div className="text-center md:text-left mb-16">
               <div className="inline-block bg-[#F1F5F9] text-orange-regal text-[10px] font-bold uppercase tracking-widest px-3 py-1 mb-3 rounded-full border border-art-gray">
@@ -481,7 +578,7 @@ export default function App() {
         </section>
 
         {/* SECTION 4: VERIFIED INVESTMENTS PROOF (100% width block) */}
-        <section className="w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-white">
+        <section id="audit-registry" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 border-b border-art-gray bg-white">
           <div className="max-w-7xl mx-auto">
             {/* Header Control Row */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
@@ -554,8 +651,11 @@ export default function App() {
           </div>
         </section>
 
+        {/* SECTION 4.5: BLOG & TENANCY ADVISORY (MODAL-ENABLED) */}
+        <BlogSection />
+
         {/* SECTION 5: CONTACT & INQUIRY FORM (100% width block) */}
-        <section id="contact" className="w-full py-20 md:py-28 px-6 md:px-12 bg-[#0F172A] text-white">
+        <section id="contact" className="scroll-mt-24 w-full py-20 md:py-28 px-6 md:px-12 bg-[#0F172A] text-white">
           <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             
             {/* Contact details text */}

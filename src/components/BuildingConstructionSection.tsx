@@ -77,7 +77,7 @@ export default function BuildingConstructionSection() {
   ];
 
   return (
-    <section id="building-construction" className="w-full py-20 lg:py-28 px-6 md:px-12 bg-white text-slate-900 border-b border-art-gray">
+    <section id="building-construction" className="scroll-mt-24 w-full py-20 lg:py-28 px-6 md:px-12 bg-white text-slate-900 border-b border-art-gray">
       <div className="max-w-7xl mx-auto">
 
         {/* Top Eyebrow & Category */}
