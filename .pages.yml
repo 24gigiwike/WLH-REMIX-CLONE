@@ -4,7 +4,7 @@ media:
 
 content:
   - name: audit_homes
-    label: Audit Registry
+    label: Audit Registry (Legacy)
     type: collection
     path: src/data/audit_homes
     format: json
@@ -29,6 +29,78 @@ content:
       - name: loc
         label: Location
         type: string
+      - name: status
+        label: Status
+        type: string
       - name: desc
         label: Description
         type: text
+
+  - name: registry_videos
+    label: Collection - Videos
+    type: collection
+    path: src/data/registry_videos
+    format: json
+    filename: "{id}.json"
+    fields:
+      - name: id
+        label: Video ID
+        type: string
+        required: true
+      - name: name
+        label: Name
+        type: string
+        required: true
+      - name: video
+        label: Video (File Upload or URL)
+        type: file
+        required: true
+      - name: status
+        label: Status
+        type: select
+        options:
+          - label: Fully Managed
+            value: Fully Managed
+          - label: Verified & Titled
+            value: Verified & Titled
+          - label: Ongoing Housing Project
+            value: Ongoing Housing Project
+          - label: Under Facility Care
+            value: Under Facility Care
+          - label: Now Letting
+            value: Now Letting
+        default: Fully Managed
+      - name: location
+        label: Location
+        type: string
+        required: true
+      - name: description
+        label: Description
+        type: text
+        required: true
+
+  - name: registry_photos
+    label: Collection - Photos
+    type: collection
+    path: src/data/registry_photos
+    format: json
+    filename: "{id}.json"
+    fields:
+      - name: id
+        label: Photo ID
+        type: string
+        required: true
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: image
+        label: Photo Image
+        type: image
+        required: true
+      - name: location
+        label: Location (Optional)
+        type: string
+      - name: status
+        label: Status (Optional)
+        type: string

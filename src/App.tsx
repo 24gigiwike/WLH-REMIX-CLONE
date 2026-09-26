@@ -27,10 +27,11 @@ import {
   HardHat,
   BookOpen
 } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import PremiumPropertyCarousel from "./components/PremiumPropertyCarousel";
 import BuildingConstructionSection from "./components/BuildingConstructionSection";
 import BlogSection from "./components/BlogSection";
+import RegistryCollectionPage from "./components/RegistryCollectionPage";
 
 // Navigation menu anchors for seamless site exploration
 const NAV_ITEMS = [
@@ -41,6 +42,7 @@ const NAV_ITEMS = [
   { label: "Construction", href: "#building-construction", icon: HardHat },
   { label: "Leadership", href: "#leadership", icon: Briefcase },
   { label: "Audit Registry", href: "#audit-registry", icon: FileCheck },
+  { label: "Media Vault", href: "#collection", icon: Video },
   { label: "Blog & Advisory", href: "#blog", icon: BookOpen },
   { label: "Contact", href: "#contact", icon: Phone },
 ];
@@ -66,6 +68,13 @@ const fadeIn = {
 };
 
 export default function App() {
+  const [currentView, setCurrentView] = useState<"home" | "collection">(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      return hash === "#collection" || hash === "#registry-collection" ? "collection" : "home";
+    }
+    return "home";
+  });
   const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -75,6 +84,22 @@ export default function App() {
     type: ""
   });
 
+  // Listen to hash change for seamless client-side page routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === "#collection" || hash === "#registry-collection") {
+        setCurrentView("collection");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        setCurrentView("home");
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const subject = encodeURIComponent("Consultation Request: Property Investment");
@@ -83,6 +108,24 @@ export default function App() {
     );
     window.location.href = `mailto:info@wiselivinghomes.com.ng?subject=${subject}&body=${body}`;
   };
+
+  // Dedicated full-page collection view for verified videos and photos
+  if (currentView === "collection") {
+    return (
+      <RegistryCollectionPage
+        onBack={() => {
+          window.location.hash = "#audit-registry";
+          setCurrentView("home");
+          setTimeout(() => {
+            const el = document.getElementById("audit-registry");
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 80);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-navy-regal flex flex-col selection:bg-orange-regal selection:text-navy-regal">
@@ -584,7 +627,7 @@ export default function App() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
               <div className="text-center md:text-left">
                 <div className="inline-block bg-[#F1F5F9] text-emerald-regal text-[10px] font-bold uppercase tracking-widest px-3 py-1 mb-3 rounded-full border border-art-gray">
-                  Audit Registry
+                  Audit Registry Preview
                 </div>
                 <h2 className="text-3xl md:text-4xl font-extrabold text-navy-regal tracking-tight">
                   Verified On-Ground Investments
@@ -593,11 +636,27 @@ export default function App() {
                   Real property portfolios successfully audited, cataloged, and managed with absolute transparency by our physical verification field experts.
                 </p>
               </div>
+
+              {/* SEE MORE BUTTON IN HEADER */}
+              <div className="flex items-center justify-center md:justify-end shrink-0">
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.hash = "#collection";
+                    setCurrentView("collection");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1f8266] hover:bg-[#186a53] text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md cursor-pointer group"
+                >
+                  <span>See More</span>
+                  <ArrowRight className="w-4 h-4 text-[#cfc070] group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
             </div>
 
-            {/* Audit Homes Grid */}
+            {/* Audit Homes Grid (Curated Preview: Top 3 properties to keep the frontpage clean) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {AUDIT_HOMES.map((prop) => (
+              {AUDIT_HOMES.slice(0, 3).map((prop) => (
                 <div key={prop.id} className="relative group overflow-hidden border border-art-gray rounded-lg shadow-sm bg-[#F8FAFC]">
                   <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-100">
                     {prop.isVideo ? (
@@ -647,6 +706,33 @@ export default function App() {
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* SEE MORE CALLOUT BANNER LEADING TO THE NEW COLLECTION PAGE */}
+            <div className="mt-12 p-6 sm:p-8 bg-[#F8FAFC] border border-art-gray rounded-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
+              <div className="text-center sm:text-left">
+                <span className="text-[10px] font-bold text-[#1f8266] uppercase tracking-wider block mb-1">
+                  Full Video & Photo Archive
+                </span>
+                <h3 className="text-lg sm:text-xl font-extrabold text-navy-regal">
+                  Want to explore all verified property records and on-ground footage?
+                </h3>
+                <p className="text-xs text-navy-regal/60 mt-1 max-w-lg font-light leading-relaxed">
+                  Browse our complete catalog of field inspections, perimeter surveys, and video walkthroughs across Lagos and surrounding investment corridors.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.hash = "#collection";
+                  setCurrentView("collection");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="shrink-0 inline-flex items-center gap-2.5 px-6 py-3.5 bg-[#1f8266] hover:bg-[#186a53] text-white rounded-lg font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg cursor-pointer group"
+              >
+                <span>See More</span>
+                <ArrowRight className="w-4 h-4 text-[#cfc070] group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
           </div>
         </section>
