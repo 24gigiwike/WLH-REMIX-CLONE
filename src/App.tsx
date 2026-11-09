@@ -140,7 +140,7 @@ export default function App() {
             <a href="#hero" className="flex items-center gap-2.5 sm:gap-3.5 md:gap-4 shrink-0 group">
               <div className="flex items-center shrink-0 bg-white p-1 sm:p-1.5 rounded-lg shadow-sm border border-white/20">
                 <img 
-                  src="https://res.cloudinary.com/dtkluxukm/image/upload/v1788147995/wlh-logo_orubpv.jpg" 
+                  src="https://media.broadbrand.com.ng/image/wlh-logo_orubpv.jpg" 
                   alt="WiseLiving Homes and Property LTD. Logo"
                   className="h-8 xs:h-9 sm:h-11 md:h-12 w-auto object-contain rounded"
                   referrerPolicy="no-referrer"
@@ -299,7 +299,7 @@ export default function App() {
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-700 hover:scale-105"
             style={{ 
-              backgroundImage: "url('https://res.cloudinary.com/dtkluxukm/image/upload/v1781662225/hero_cjemw0.jpg')",
+              backgroundImage: "url('https://media.broadbrand.com.ng/image/hero_cjemw0.jpg')",
             }}
           />
           
@@ -340,7 +340,7 @@ export default function App() {
               <div className="flex items-center gap-4">
                 <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-emerald-regal shadow-md shrink-0">
                   <img 
-                    src="https://res.cloudinary.com/dtkluxukm/image/upload/v1780635330/bod2_pdn3zp.jpg"
+                    src="https://media.broadbrand.com.ng/image/bod2_pdn3zp.jpg"
                     alt="Founder"
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
@@ -580,27 +580,27 @@ export default function App() {
                 {
                   name: "Mr Joe Samuel Udoh",
                   role: "Chairman",
-                  image: "https://res.cloudinary.com/dtkluxukm/image/upload/v1780635330/bod1_s8q0xo.jpg"
+                  image: "https://media.broadbrand.com.ng/image/bod1_s8q0xo.jpg"
                 },
                 {
                   name: "Consultant Vivian Ekanem",
                   role: "MD/CEO",
-                  image: "https://res.cloudinary.com/dtkluxukm/image/upload/v1780635330/bod2_pdn3zp.jpg"
+                  image: "https://media.broadbrand.com.ng/image/bod2_pdn3zp.jpg"
                 },
                 {
                   name: "Engr. Frankiln Akan",
                   role: "Structural Engineer",
-                  image: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781877355/Franklin0_tsmwjk.jpg"
+                  image: "https://media.broadbrand.com.ng/image/Franklin0_tsmwjk.jpg"
                 },
                 {
                   name: "Barr Asuka Ndego",
                   role: "Lawyer",
-                  image: "https://res.cloudinary.com/dtkluxukm/image/upload/v1786955481/wlhstaff_d4vsiv.jpg"
+                  image: "https://media.broadbrand.com.ng/image/wlhstaff_d4vsiv.jpg"
                 },
                 {
                   name: "Mrs Okeke Amarachi Grace",
                   role: "Director, Tenants and Landlord Relations",
-                  image: "https://res.cloudinary.com/dtkluxukm/image/upload/v1780635330/bod3_yrwdyq.jpg"
+                  image: "https://media.broadbrand.com.ng/image/bod3_yrwdyq.jpg"
                 }
               ].map((member, i) => (
                 <div key={i} className="flex flex-col items-center text-center p-6 border border-art-gray rounded-lg bg-[#F8FAFC] shadow-sm/30 hover:shadow-md transition-all duration-300">

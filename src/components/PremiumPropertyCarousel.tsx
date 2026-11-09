@@ -15,7 +15,7 @@ export default function PremiumPropertyCarousel() {
   const slides: CarouselSlide[] = [
     {
       id: 1,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781854699/IMG-20260619-WA0056_a782ga.jpg",
+      url: "https://media.broadbrand.com.ng/image/IMG-20260619-WA0056_a782ga.jpg",
       title: "Quality Homes. Prime Locations.",
       subtitle: "Exquisite architectural masterpieces tailored to your elevated lifestyle.",
       badge: "ULTRA LUXURY VILLA",
@@ -23,7 +23,7 @@ export default function PremiumPropertyCarousel() {
     },
     {
       id: 2,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781854698/IMG-20260619-WA0054_imtgat.jpg",
+      url: "https://media.broadbrand.com.ng/image/IMG-20260619-WA0054_imtgat.jpg",
       title: "Premium Residential Developments",
       subtitle: "Stunning contemporary family estates built with absolute investment certainty.",
       badge: "EXQUISITE ESTATE",
@@ -31,7 +31,7 @@ export default function PremiumPropertyCarousel() {
     },
     {
       id: 3,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781854698/IMG-20260619-WA0055_onunf6.jpg",
+      url: "https://media.broadbrand.com.ng/image/IMG-20260619-WA0055_onunf6.jpg",
       title: "Trusted Real Estate Solutions",
       subtitle: "Where visual ergonomic aesthetics match robust, long-term asset value.",
       badge: "INTERIOR COMFORT",
@@ -39,7 +39,7 @@ export default function PremiumPropertyCarousel() {
     },
     {
       id: 4,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781854698/IMG-20260618-WA0273_anbaag.jpg",
+      url: "https://media.broadbrand.com.ng/image/IMG-20260618-WA0273_anbaag.jpg",
       title: "Bespoke Architectural Mastery",
       subtitle: "Unique builds designed by high-end architects to define luxury living.",
       badge: "CUSTOM BUILD",
@@ -47,7 +47,7 @@ export default function PremiumPropertyCarousel() {
     },
     {
       id: 5,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781006504/IMG-20260606-WA0308_gj1gew.jpg",
+      url: "https://media.broadbrand.com.ng/image/IMG-20260606-WA0308_gj1gew.jpg",
       title: "Prime Investment Opportunities",
       subtitle: "High-yielding commercial assets positioned in highly sought-after urban corridors.",
       badge: "COMMERCIAL PORTFOLIO",
@@ -55,7 +55,7 @@ export default function PremiumPropertyCarousel() {
     },
     {
       id: 6,
-      url: "https://res.cloudinary.com/dtkluxukm/image/upload/v1781864653/siteraw_orcrxt.jpg",
+      url: "https://media.broadbrand.com.ng/image/siteraw_orcrxt.jpg",
       title: "Premium Modern Apartments",
       subtitle: "Breathtaking sky terraces and stylish apartment modules with outstanding facilities.",
       badge: "METROPOLITAN RESIDENCE",

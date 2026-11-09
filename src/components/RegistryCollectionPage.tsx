@@ -229,7 +229,7 @@ export default function RegistryCollectionPage({ onBack }: RegistryCollectionPag
             <div className="flex items-center gap-2.5">
               <div className="flex items-center bg-white p-1 rounded-md shadow-sm border border-white/20 shrink-0">
                 <img 
-                  src="https://res.cloudinary.com/dtkluxukm/image/upload/v1788147995/wlh-logo_orubpv.jpg" 
+                  src="https://media.broadbrand.com.ng/image/wlh-logo_orubpv.jpg" 
                   alt="WiseLiving Logo"
                   className="h-7 w-auto object-contain rounded"
                   referrerPolicy="no-referrer"
